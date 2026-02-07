@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Notes Dashboard</title>
+  <link rel="stylesheet" href="notes.css" />
+</head>
+<body>
+<div class="notes-dashboard">
+
+  <!-- LEFT PANEL -->
+  <aside class="panel-left">
+    <div class="panel-header">
+      <h2>My Notes</h2>
+      <span id="totalNotes">0</span>
+    </div>
+
+    <input type="text" id="searchNotes" placeholder="Search notes..." class="search-bar">
+
+    <div class="notes-list" id="notesList">
+      <!-- Notes will be appended here -->
+    </div>
+
+    <button id="addNoteBtn" class="btn-add">+ Add Note</button>
+    <button id="homeBtn" class="btn-home">🏠 Home</button>
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <div class="panel-right">
+    <div class="note-view">
+      <input type="text" id="noteTitle" placeholder="Note Title">
+      <textarea id="noteContent" placeholder="Start typing your note..."></textarea>
+      <div class="note-actions">
+        <button id="saveNoteBtn" class="btn-save">Save Note</button>
+        <button id="deleteNoteBtn" class="btn-delete">Delete Note</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="notes.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendar</title>
+  <link rel="stylesheet" href="calendar.css" />
+</head>
+<body>
+
+<div class="calendar-layout">
+
+  <!-- LEFT PANEL -->
+  <aside class="calendar-left">
+    <button class="home-btn" id="homeBtn">🏠 Home</button>
+
+    <div class="calendar-logo">
+      <h2>TimeFrame</h2>
+    </div>
+
+    <div class="calendar-mode">
+      <button id="dailyBtn" class="mode-btn active">Daily</button>
+      <button id="weeklyBtn" class="mode-btn">Weekly</button>
+      <button id="monthlyBtn" class="mode-btn">Monthly</button>
+    </div>
+
+    <button class="add-event-btn" id="addEventBtn">+ Add Event</button>
+
+    <div class="event-list" id="eventList"></div>
+<div class="event-list" id="eventList"></div>
+
+    <!-- Mini Calendar -->
+    <div class="mini-calendar">
+      <div class="mini-top">
+        <h3 id="miniMonthTitle">January 2024</h3>
+        <div class="mini-btns">
+          <button id="miniPrev">‹</button>
+          <button id="miniNext">›</button>
+        </div>
+      </div>
+
+      <div class="mini-weekdays">
+        <span>Mo</span><span>Tu</span><span>We</span><span>Th</span>
+        <span>Fr</span><span>Sa</span><span>Su</span>
+      </div>
+
+      <div class="mini-days" id="miniDays"></div>
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="calendar-tasks">
+      <div class="task-title">
+        <h3>My Tasks</h3>
+        <span class="badge" id="taskCount">0</span>
+      </div>
+
+      <div class="task-list" id="taskContainer">
+        <!-- Task items will appear here -->
+      </div>
+
+      <button class="add-task-btn" id="addTaskBtn">+ Add Task</button>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <main class="calendar-main">
+
+    <!-- HEADER -->
+    <header class="calendar-header">
+      <div>
+        <h1>My Calendar</h1>
+      </div>
+
+      <div class="calendar-header-right">
+        <div class="mode-switch">
+          <span>Dark</span>
+          <button id="themeToggle">Light</button>
+        </div>
+
+        <button class="add-event-btn" id="addEventBtnTop">+ Add Event</button>
+      </div>
+    </header>
+
+    <!-- WEEK NAV -->
+    <div class="week-nav">
+      <button id="weekPrev">‹</button>
+      <h2 id="weekTitle">January 05 - 2024</h2>
+      <button id="weekNext">›</button>
+    </div>
+
+    <!-- RIGHT PANEL GRID -->
+    <div class="advanced-calendar-grid">
+
+      <div class="grid-header">
+        <div class="corner"></div>
+        <div class="day-headers" id="dayHeaders"></div>
+      </div>
+
+      <div class="grid-body">
+        <div class="time-column" id="timeColumn"></div>
+        <div class="days-columns" id="daysColumns"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- EVENT MODAL -->
+<div class="modal" id="eventModal">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h2>Create Event</h2>
+      <button class="close-modal" id="closeModal">✕</button>
+    </div>
+
+    <p class="modal-subtitle">
+      Add a professional event like Microsoft Calendar.
+    </p>
+
+    <div class="modal-body">
+      <label>Event Title</label>
+      <input type="text" id="eventTitle" placeholder="Example: Yoga Exercise">
+
+      <input type="hidden" id="eventDay" value="0">
+
+      <label>Day</label>
+      <div class="custom-dropdown" id="eventDayDropdown">
+        <div class="dropdown-selected" id="selectedDay">Monday</div>
+        <div class="dropdown-options" id="dayOptions">
+          <div class="dropdown-option" data-value="0">Monday</div>
+          <div class="dropdown-option" data-value="1">Tuesday</div>
+          <div class="dropdown-option" data-value="2">Wednesday</div>
+          <div class="dropdown-option" data-value="3">Thursday</div>
+          <div class="dropdown-option" data-value="4">Friday</div>
+          <div class="dropdown-option" data-value="5">Saturday</div>
+          <div class="dropdown-option" data-value="6">Sunday</div>
+        </div>
+      </div>
+
+      <label>Start Time</label>
+      <input type="time" id="eventTime">
+
+      <label>Choose Color</label>
+      <div class="color-picker" id="eventColors">
+        <span class="color-dot active" data-color="#8f7cff" style="background-color:#8f7cff;"></span>
+        <span class="color-dot" data-color="#ffd369" style="background-color:#ffd369;"></span>
+        <span class="color-dot" data-color="#ff4d4d" style="background-color:#ff4d4d;"></span>
+        <span class="color-dot" data-color="#4dff88" style="background-color:#4dff88;"></span>
+        <span class="color-dot" data-color="#4da6ff" style="background-color:#4da6ff;"></span>
+      </div>
+
+      <div class="modal-actions">
+        <button id="saveEventBtn">Save Event</button>
+        <button id="deleteEvent">Delete Event</button>
+        <button id="nextEvent">Next Event</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- TASK MODAL -->
+<div class="modal" id="taskModal">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h2>Add Task</h2>
+      <button class="close-modal" id="closeTaskModal">×</button>
+    </div>
+
+    <div class="modal-subtitle">Enter task details below</div>
+
+    <div class="modal-body">
+      <input type="text" id="taskTitle" placeholder="Task Title">
+      <textarea id="taskInfo" placeholder="Task Details"></textarea>
+    </div>
+
+    <button class="save-btn" id="saveTaskBtn">Add Task</button>
+
+  </div>
+</div>
+
+
+<!-- GRID EVENT MODAL -->
+<div class="modal" id="gridEventModal">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h2>Cell Event</h2>
+      <button class="close-modal" id="closeGridModal">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <label for="gridEventInput">Enter Event:</label>
+      <input type="text" id="gridEventInput" placeholder="Event details..." />
+
+      <!-- ✅ NEW: SHOW SAVED TASK/EVENT HERE -->
+      <div class="grid-saved-preview">
+        <p class="preview-title">Saved Event:</p>
+        <div id="gridSavedText">No event saved</div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button id="saveGridEvent">Save</button>
+      <button id="deleteGridEvent">Delete</button>
+      <button id="cancelGridEvent">Cancel</button>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="calendar.js"></script>
+</body>
+</html>

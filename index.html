@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body >
+
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="profile-logo" id="openProfile">
+  <h2 class="logo">Rahima</h2>
+  <span class="info-icon">ⓘ Info </span>
+</div>
+
+<ul class="menu">
+  <li class="active">Dashboard</li>
+  <li id="addPlaylistBtn" class="add-playlist">+ Add Playlist</li>
+
+  <li>
+    <ul id="playlistContainer" class="playlist-container"></ul>
+  </li>
+ <li><a href="notes.html" class="menu-btn" id="menuNotes">📝 Notes</a></li>
+  <li><a href="meeting.html" class="menu-btn" id="menuMeetings">📅 Meetings</a></li>
+  <li><a href="clock.html" class="menu-btn" id="menuClock">⏰ Clock</a></li>
+  <li><a href="calender.html" class="menu-btn" id="menuCalendar">🗓 Calendar</a></li>
+ 
+</ul>
+
+<div id="mainContent"></div>
+
+    <div class="calendar-box">
+        <button class="cal-btn">&#10094;</button>
+        <span>February 2026</span>
+        <button class="cal-btn">&#10095;</button>
+      </div>
+
+<!-- ================= Sidebar Toolbar ================= -->
+<div class="sidebar-toolbar">
+  <!-- Log Out Button -->
+  <button id="logoutBtn" title="Log Out">
+    <i class="fa fa-sign-out-alt"></i>
+  </button>
+
+  <!-- Settings Button -->
+  <button id="settingsBtn" title="Settings">
+    <i class="fa fa-cog"></i>
+  </button>
+</div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- TOP HEADER -->
+      <div class="header">
+        <div>
+          <h1>Welcome back, Rahima!</h1>
+          <p>Manage your tasks efficiently.</p>
+        </div>
+
+        <div class="profile">
+          <img src="https://i.pravatar.cc/50" alt="profile">
+        </div>
+      </div>
+
+
+      <!-- TASK INPUT BAR -->
+      <div class="task-input">
+
+        <input type="text" id="taskText" placeholder="Enter your task..." />
+
+        <!-- Custom Category Dropdown -->
+        <div class="custom-select" id="categorySelect">
+          <div class="select-box">
+            <span class="selected-text">Work</span>
+            <span class="arrow">▾</span>
+          </div>
+
+          <div class="options">
+            <div class="option selected" data-value="Work">Work</div>
+            <div class="option" data-value="Personal">Personal</div>
+            <div class="option" data-value="Important">Important</div>
+          </div>
+        </div>
+
+
+        <!-- Custom Priority Dropdown -->
+        <div class="custom-select" id="prioritySelect">
+          <div class="select-box">
+            <span class="selected-text">Low</span>
+            <span class="arrow">▾</span>
+          </div>
+
+          <div class="options">
+            <div class="option selected" data-value="Low">Low</div>
+            <div class="option" data-value="Medium">Medium</div>
+            <div class="option" data-value="High">High</div>
+          </div>
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="task-buttons">
+             <button id="calendarBtn">📅</button>
+          <button id="clockBtn">⏰</button>
+          <button id="addTaskBtn">Add Task</button>
+        </div>
+
+      </div>
+
+
+      <!-- CARDS -->
+      <div class="cards">
+
+        <div class="card">
+          <h3>Task Overview</h3>
+          <p id="pendingCount">0 Tasks Pending</p>
+          <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Priority Tasks</h3>
+          <p id="priorityText">No high priority tasks.</p>
+        </div>
+
+      </div>
+
+
+      <!-- TASK LIST -->
+      <div class="task-list" id="taskList">
+        <!-- tasks appear here -->
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- Reminder Modal -->
+  <div class="modal" id="reminderModal">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2>Set Reminder</h2>
+        <button class="close-modal" id="closeModal">✕</button>
+      </div>
+
+      <p class="modal-subtitle">Choose date & time for your task reminder.</p>
+
+      <div class="modal-body">
+        <label>Date</label>
+        <input type="date" id="reminderDate">
+
+        <label>Time</label>
+        <input type="time" id="reminderTime">
+      </div>
+
+      <button class="save-reminder" id="saveReminderBtn">Save Reminder</button>
+
+    </div>
+  </div>
+<!-- Calendar Modal -->
+<div class="modal" id="calendarModal">
+  <div class="modal-content calendar-content">
+
+    <div class="modal-header">
+      <h2>Calendar 2026</h2>
+      <button class="close-modal" id="closeCalendarModal">✕</button>
+    </div>
+
+    <p class="modal-subtitle">
+      Miladi • Shamsi • Qamari (Live Conversion)
+    </p>
+
+    <div class="calendar-top">
+      <button class="year-btn" id="prevMonth">❮</button>
+      <h3 id="calendarTitle">January 2026</h3>
+      <button class="year-btn" id="nextMonth">❯</button>
+    </div>
+
+    <div class="calendar-weekdays">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+      <span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+
+    <div class="calendar-days" id="calendarDays"></div>
+
+    <div class="calendar-footer">
+      <div class="calendar-info">
+        <h4>Selected Date</h4>
+        <p id="miladiDate">Miladi: -</p>
+        <p id="shamsiDate">Shamsi: -</p>
+        <p id="qamariDate">Qamari: -</p>
+      </div>
+
+      <button class="set-date-btn" id="useDateBtn">Use Date</button>
+    </div>
+
+  </div>
+</div>
+<!-- Profile Modal -->
+<div class="modal" id="profileModal">
+  <div class="modal-content profile-content">
+
+    <div class="modal-header">
+      <h2>Profile Settings</h2>
+      <button class="close-modal" id="closeProfileModal">✕</button>
+    </div>
+
+    <p class="modal-subtitle">
+      Fill your personal info. Saved automatically in your dashboard.
+    </p>
+
+    <div class="profile-top">
+      <img id="profilePreview" src="https://i.pravatar.cc/120" alt="profile">
+      <div class="profile-upload">
+        <label for="profileImage">Upload Image</label>
+        <input type="file" id="profileImage" accept="image/*">
+      </div>
+    </div>
+
+    <div class="profile-form">
+
+      <div class="form-row">
+        <div class="input-box">
+          <label>Full Name</label>
+          <input type="text" id="profileName" placeholder="Enter your name">
+        </div>
+
+        <div class="input-box">
+          <label>Email</label>
+          <input type="email" id="profileEmail" placeholder="example@gmail.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="input-box">
+          <label>Phone</label>
+          <input type="text" id="profilePhone" placeholder="+93 000 000 000">
+        </div>
+
+        <div class="input-box">
+          <label>Country</label>
+          <input type="text" id="profileCountry" placeholder="Afghanistan">
+        </div>
+      </div>
+
+      <div class="input-box">
+        <label>About You</label>
+        <textarea id="profileBio" placeholder="Write something about yourself..."></textarea>
+      </div>
+
+    </div>
+
+    <button class="save-reminder" id="saveProfileBtn">Save Profile</button>
+
+  </div>
+</div>
+<!-- PLAYLIST MODAL -->
+<div class="modal" id="playlistModal">
+  <div class="modal-content playlist-content">
+
+    <div class="modal-header">
+      <h2>Create Playlist</h2>
+      <button class="close-modal" id="closePlaylistModal">✕</button>
+    </div>
+
+    <p class="modal-subtitle">
+      Create a professional playlist like Microsoft To Do.
+    </p>
+
+    <div class="modal-body">
+      <label>Playlist Name</label>
+      <input type="text" id="playlistNameInput" placeholder="Example: University Tasks">
+
+      <label>Choose Color</label>
+          <div class="color-picker" id="playlistColors">
+        <span class="color-dot active" data-color="var(--primary)" style="background: var(--primary)"></span>
+        <span class="color-dot" data-color="var(--secondary)" style="background: var(--secondary)"></span>
+        <span class="color-dot" data-color="#ff4d4d" style="background: #ff4d4d"></span>
+        <span class="color-dot" data-color="#4dff88" style="background: #4dff88"></span>
+        <span class="color-dot" data-color="#4da6ff" style="background: #4da6ff"></span>
+      </div>
+      <label>Optional Date</label>
+      <input type="date" id="playlistDateInput">
+
+      <label>Optional Time</label>
+      <input type="time" id="playlistTimeInput">
+    </div>
+
+ <div class="modal-footer">
+  <button class="save-reminder" id="savePlaylistBtn">Save Playlist</button>
+</div>
+<div class="playlist-left">
+
+</div>
+<div class="playlist-actions">
+  <button class="playlist-delete" title="Delete Playlist">✕</button>
+</div>
+
+
+  </div>
+</div>
+
+
+
+
+
+<!-- Settings Modal -->
+<div class="modal" id="settingsModal">
+  <div class="modal-content settings-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Settings</h2>
+      <button class="close-modal" id="closeSettingsModal">✕</button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="settings-tabs">
+      <button class="tab-btn active" data-tab="profileTab">Profile</button>
+      <button class="tab-btn" data-tab="themeTab">Theme</button>
+      <button class="tab-btn" data-tab="todoTab">To-Do</button>
+      <button class="tab-btn" data-tab="reportTab">Report</button>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="settings-body">
+
+      <!-- Profile Tab -->
+      <div class="tab-content active" id="profileTab">
+        <label>Name</label>
+        <input type="text" id="settingsProfileName">
+
+        <label>Email</label>
+        <input type="email" id="settingsProfileEmail">
+
+        <label>Phone</label>
+        <input type="text" id="settingsProfilePhone">
+
+        <label>Country</label>
+        <input type="text" id="settingsProfileCountry">
+
+        <label>Bio</label>
+        <textarea id="settingsProfileBio"></textarea>
+
+        <label>Profile Image</label>
+        <input type="file" id="settingsProfileImage">
+        <img id="settingsProfilePreview" src="https://i.pravatar.cc/120" alt="Profile Preview">
+
+        <button id="saveSettingsProfile">Save Profile</button>
+      </div>
+
+      <!-- Theme Tab -->
+      <div class="tab-content" id="themeTab">
+        <h3>Theme Switcher</h3>
+        <div class="theme-switcher">
+          <button class="theme-btn" data-theme="light" id="lightBtn">
+            <i class="fa fa-sun"></i>
+          </button>
+          <button class="theme-btn" data-theme="dark" id="darkBtn">
+            <i class="fa fa-moon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- To-Do Tab -->
+      <div class="tab-content" id="todoTab">
+        <h3>Your Playlists</h3>
+        <ul id="settingsPlaylistContainer"></ul>
+      </div>
+
+      <!-- Report Tab -->
+      <div class="tab-content" id="reportTab">
+        <h3>Daily Report</h3>
+        <p id="dailyReportText"></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+ <div id="notesApp"></div>
+ 
+  <script src="script.js" defer></script>
+</body>
+</html>

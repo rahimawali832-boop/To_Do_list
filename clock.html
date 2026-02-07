@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TimeFrame Clock</title>
+  <link rel="stylesheet" href="clock.css"/>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="top-bar">
+    <h1>⏳ TimeFrame Clock</h1>
+
+    <div class="top-actions">
+      <button id="homeBtn">🏠 Home</button>
+      <button id="clearAllBtn">🗑 Clear Saved</button>
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div class="clock-layout">
+
+    <!-- LEFT MENU -->
+    <aside class="clock-menu">
+      <button class="tab-btn active" data-tab="tabClock">🕒 Clock</button>
+      <button class="tab-btn" data-tab="tabStopwatch">⏱ Stopwatch</button>
+      <button class="tab-btn" data-tab="tabTimer">⏳ Timer</button>
+      <button class="tab-btn" data-tab="tabAlarm">⏰ Alarm</button>
+
+      <div class="saved-title">
+        <h3>Saved Items</h3>
+      </div>
+
+      <div class="saved-box">
+        <div id="savedTimers"></div>
+        <div id="savedAlarms"></div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="clock-content">
+
+      <!-- CLOCK TAB -->
+      <section class="tab-content active" id="tabClock">
+        <div class="clock-card">
+
+          <div class="digital-clock">
+            <h2 id="liveClock">00:00:00</h2>
+            <p id="liveDate">Loading...</p>
+          </div>
+
+          <div class="analog-wrapper">
+            <div class="analog-clock">
+              <div class="hand hour" id="hourHand"></div>
+              <div class="hand minute" id="minuteHand"></div>
+              <div class="hand second" id="secondHand"></div>
+              <div class="clock-center"></div>
+
+              <span class="num n12">12</span>
+              <span class="num n3">3</span>
+              <span class="num n6">6</span>
+              <span class="num n9">9</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- STOPWATCH TAB -->
+      <section class="tab-content" id="tabStopwatch">
+        <div class="tool-card">
+          <h2>Stopwatch</h2>
+
+          <div class="stopwatch-display" id="stopwatchDisplay">00:00:00.000</div>
+
+          <div class="tool-actions">
+            <button id="startStopwatch">Start</button>
+            <button id="pauseStopwatch">Pause</button>
+            <button id="resetStopwatch">Reset</button>
+            <button id="lapStopwatch">Lap</button>
+          </div>
+
+          <div class="lap-box">
+            <h3>Laps</h3>
+            <div id="lapList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMER TAB -->
+      <section class="tab-content" id="tabTimer">
+        <div class="tool-card">
+          <h2>Timer</h2>
+
+          <div class="timer-inputs">
+            <input type="number" id="timerHours" placeholder="HH" min="0">
+            <input type="number" id="timerMinutes" placeholder="MM" min="0" max="59">
+            <input type="number" id="timerSeconds" placeholder="SS" min="0" max="59">
+          </div>
+
+          <div class="timer-display" id="timerDisplay">00:00:00</div>
+
+          <div class="tool-actions">
+            <button id="startTimer">Start</button>
+            <button id="pauseTimer">Pause</button>
+            <button id="resetTimer">Reset</button>
+            <button id="saveTimer">Save Timer</button>
+          </div>
+
+          <div class="active-timers-box">
+            <h3>Running Timers</h3>
+            <div id="activeTimers"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ALARM TAB -->
+      <section class="tab-content" id="tabAlarm">
+        <div class="tool-card">
+          <h2>Alarm / Reminder</h2>
+
+          <div class="alarm-inputs">
+            <input type="time" id="alarmTime">
+            <input type="text" id="alarmLabel" placeholder="Label (Example: Wake up)">
+          </div>
+
+          <div class="tool-actions">
+            <button id="addAlarmBtn">Add Alarm</button>
+          </div>
+
+          <div class="alarm-list-box">
+            <h3>Active Alarms</h3>
+            <div id="alarmList"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SOUND -->
+  <audio id="alarmSound">
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+  </audio>
+
+<script src="clock.js"></script>
+</body>
+</html>

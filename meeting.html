@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Meetings Dashboard</title>
+  <link rel="stylesheet" href="meeting.css" />
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- LEFT PANEL: Meetings List -->
+  <aside class="panel-left">
+    <div class="panel-header">
+      <h2>My Meetings</h2>
+      <span id="totalMeetings">0</span>
+    </div>
+    <div class="meetings-list" id="meetingsList">
+      <!-- Meeting cards will be appended here -->
+    </div>
+    <button id="addMeetingBtn" class="btn-add">+ Add Meeting</button>
+    <br>
+<button id="homeBtn" class="btn-home">🏠 Home</button>
+
+  </aside>
+
+  <!-- RIGHT PANEL: Upcoming Meeting + Clock -->
+  <main class="panel-right">
+    <div class="clock-container">
+      <div class="live-clock" id="liveClock">00:00:00</div>
+      <div class="next-meeting">
+        <h3>Next Meeting</h3>
+        <div class="next-info">
+          <span id="nextMeetingTitle">No upcoming meeting</span>
+          <span id="nextMeetingCountdown">--:--:--</span>
+          <div class="meeting-links" id="nextMeetingLinks"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ADD / EDIT MEETING MODAL -->
+<div class="modal" id="meetingModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Add Meeting</h2>
+      <button class="close-modal" id="closeMeetingModal">✕</button>
+    </div>
+    <div class="modal-body">
+      <label>Meeting Title</label>
+      <input type="text" id="meetingTitle" placeholder="Project Sync">
+
+      <label>Date & Time</label>
+      <input type="datetime-local" id="meetingDateTime">
+
+      <label>Participants (comma separated)</label>
+      <input type="text" id="meetingParticipants" placeholder="John, Sarah">
+
+      <label>Platform</label>
+      <select id="meetingPlatform">
+        <option value="google">Google Meet</option>
+        <option value="zoom">Zoom</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label>Link</label>
+      <input type="url" id="meetingLink" placeholder="https://">
+
+      <label>Color</label>
+      <input type="color" id="meetingColor" value="#8f7cff">
+    </div>
+    <div class="modal-actions">
+      <button id="saveMeetingBtn" class="btn-save">Save</button>
+      <button id="deleteMeetingBtn" class="btn-delete">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="meeting.js"></script>
+</body>
+</html>

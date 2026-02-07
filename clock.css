@@ -1,0 +1,376 @@
+:root {
+  --bg: #0a0b14;
+  --panel: rgba(255, 255, 255, 0.06);
+  --glass: rgba(255, 255, 255, 0.10);
+  --border: rgba(255, 255, 255, 0.18);
+  --text: #f2f4ff;
+  --muted: rgba(255, 255, 255, 0.6);
+  --accent: #8f7cff;
+  --accent2: #4da6ff;
+  --danger: #ff4d4d;
+  --success: #4dff88;
+  --shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top left, #161a38, transparent 55%),
+              radial-gradient(circle at bottom right, #240a3a, transparent 55%),
+              var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* TOP BAR */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 35px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.top-bar h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.top-actions button {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.top-actions button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* MAIN LAYOUT */
+.clock-layout {
+  display: flex;
+  height: calc(100vh - 78px);
+}
+
+/* LEFT MENU */
+.clock-menu {
+  width: 280px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(15px);
+}
+
+.tab-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 650;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateX(3px);
+}
+
+.tab-btn.active {
+  background: linear-gradient(120deg, rgba(143,124,255,0.45), rgba(77,166,255,0.30));
+  border: 1px solid rgba(143,124,255,0.6);
+  box-shadow: 0 10px 25px rgba(143,124,255,0.25);
+}
+
+.saved-title {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.saved-title h3 {
+  font-size: 0.95rem;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+
+.saved-box {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  height: 320px;
+  overflow-y: auto;
+}
+
+.saved-box::-webkit-scrollbar {
+  width: 7px;
+}
+.saved-box::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+/* RIGHT CONTENT */
+.clock-content {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* CARD STYLES */
+.clock-card, .tool-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(15px);
+}
+
+/* DIGITAL CLOCK */
+.digital-clock {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.digital-clock h2 {
+  font-size: 3.5rem;
+  letter-spacing: 3px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.digital-clock p {
+  color: var(--muted);
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/* ANALOG CLOCK */
+.analog-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.analog-clock {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  box-shadow: inset 0 0 35px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.clock-center {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(143,124,255,0.8);
+}
+
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transform: translateX(-50%);
+  border-radius: 20px;
+}
+
+.hand.hour {
+  width: 8px;
+  height: 70px;
+  background: rgba(255,255,255,0.85);
+}
+
+.hand.minute {
+  width: 5px;
+  height: 95px;
+  background: rgba(255,255,255,0.7);
+}
+
+.hand.second {
+  width: 3px;
+  height: 115px;
+  background: var(--danger);
+  box-shadow: 0 0 10px rgba(255,77,77,0.7);
+}
+
+.num {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.7);
+}
+
+.n12 { top: 15px; left: 50%; transform: translateX(-50%); }
+.n3 { top: 50%; right: 15px; transform: translateY(-50%); }
+.n6 { bottom: 15px; left: 50%; transform: translateX(-50%); }
+.n9 { top: 50%; left: 15px; transform: translateY(-50%); }
+
+/* TOOL DISPLAY */
+.stopwatch-display,
+.timer-display {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 25px 0;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ACTION BUTTONS */
+.tool-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tool-actions button {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.tool-actions button:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.14);
+}
+
+/* TIMER INPUTS */
+.timer-inputs, .alarm-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.timer-inputs input, .alarm-inputs input {
+  width: 120px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+}
+
+/* LIST BOXES */
+.lap-box, .alarm-list-box, .active-timers-box {
+  margin-top: 25px;
+  border-radius: 18px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+}
+
+.lap-box h3, .alarm-list-box h3, .active-timers-box h3 {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* ITEMS */
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.item span {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.item small {
+  display: block;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.item button {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.item .delete {
+  background: rgba(255,77,77,0.25);
+  color: var(--danger);
+  border: 1px solid rgba(255,77,77,0.35);
+}
+
+.item .delete:hover {
+  background: rgba(255,77,77,0.4);
+}
+
+.item .start {
+  background: rgba(77,255,136,0.20);
+  color: var(--success);
+  border: 1px solid rgba(77,255,136,0.35);
+}
+
+.item .start:hover {
+  background: rgba(77,255,136,0.35);
+}

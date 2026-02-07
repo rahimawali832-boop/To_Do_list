@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Login Page</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="background">
+    <div class="container">
+      
+   
+      <!-- LOGIN FORM -->
+      <form id="loginForm" class="form active">
+        <h2>Login</h2>
+        <div class="input-group">
+          <input type="email" id="loginEmail" required placeholder=" ">
+          <label>Email</label>
+          <span class="input-icon">📧</span>
+          <span class="underline"></span>
+        </div>
+
+        <div class="input-group password-group">
+          <input type="password" id="loginPassword" required placeholder=" ">
+          <label>Password</label>
+          <span class="input-icon">🔒</span>
+          <span class="show-hide" id="togglePassword">👁️</span>
+          <span class="underline"></span>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="rememberMe">
+          <label for="rememberMe">Remember Me</label>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <p class="switch-text">Don't have an account? <span id="showSignup">Sign Up</span></p>
+        <p class="switch-text"><span id="showForgot">Forgot Password?</span></p>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form id="signupForm" class="form">
+        <h2>Sign Up</h2>
+        <div class="input-group">
+          <input type="email" id="signupEmail" required>
+          <label>Email</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="signupPassword" required>
+          <label>Password</label>
+        </div>
+        <button type="submit" class="btn">Sign Up</button>
+        <p class="switch-text">Already have an account? <span id="showLogin">Login</span></p>
+      </form>
+
+      <!-- FORGOT PASSWORD FORM -->
+      <form id="forgotForm" class="form">
+        <h2>Forgot Password</h2>
+        <div class="input-group">
+          <input type="email" id="forgotEmail" required>
+          <label>Email</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="newPassword" required>
+          <label>New Password</label>
+        </div>
+        <button type="submit" class="btn">Update Password</button>
+        <p class="switch-text"><span id="backLogin">Back to Login</span></p>
+      </form>
+
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
