@@ -206,26 +206,39 @@
 <div class="modal" id="profileModal">
   <div class="modal-content profile-content">
 
-    <div class="modal-header">
-      <h2>Profile Settings</h2>
-      <button class="close-modal" id="closeProfileModal">✕</button>
-    </div>
+    
+     
+    
+<div class="profile-modal">
 
-    <p class="modal-subtitle">
-      Fill your personal info. Saved automatically in your dashboard.
-    </p>
+  <!-- Header -->
+  <div class="profile-modal-header">
+    <h2 class="profile-modal-title">Profile Settings</h2>
 
-    <div class="profile-top">
-      <img id="profilePreview" src="https://i.pravatar.cc/120" alt="profile">
-      <div class="profile-upload">
-        <label for="profileImage">Upload Image</label>
-        <input type="file" id="profileImage" accept="image/*">
+    <button class="profile-close-btn" id="closeProfileModal" title="Close">
+      ✕
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="profile-modal-body">
+
+    <!-- Left side (image) -->
+    <div class="profile-left">
+      <div class="profile-image-wrapper">
+        <img id="profilePreview" src="https://i.pravatar.cc/120" alt="profile">
       </div>
+
+      <label class="profile-upload-btn" for="profileImage">
+        Upload Image
+      </label>
+      <input type="file" id="profileImage" accept="image/*">
     </div>
 
-    <div class="profile-form">
+    <!-- Right side (form) -->
+    <div class="profile-right">
 
-      <div class="form-row">
+      <div class="profile-grid">
         <div class="input-box">
           <label>Full Name</label>
           <input type="text" id="profileName" placeholder="Enter your name">
@@ -235,9 +248,7 @@
           <label>Email</label>
           <input type="email" id="profileEmail" placeholder="example@gmail.com">
         </div>
-      </div>
 
-      <div class="form-row">
         <div class="input-box">
           <label>Phone</label>
           <input type="text" id="profilePhone" placeholder="+93 000 000 000">
@@ -247,19 +258,30 @@
           <label>Country</label>
           <input type="text" id="profileCountry" placeholder="Afghanistan">
         </div>
-      </div>
 
-      <div class="input-box">
-        <label>About You</label>
-        <textarea id="profileBio" placeholder="Write something about yourself..."></textarea>
+        <div class="input-box full">
+          <label>About You</label>
+          <textarea id="profileBio" placeholder="Write something about yourself..."></textarea>
+        </div>
       </div>
 
     </div>
-
-    <button class="save-reminder" id="saveProfileBtn">Save Profile</button>
-
   </div>
+
+<div class="profile-modal-footer">
+  <button class="profile-save-btn" id="clearProfileBtn" type="button">
+    🧹 Clear
+  </button>
+
+  <button class="profile-save-btn" id="saveProfileBtn" type="button">
+    💾 Save
+  </button>
 </div>
+
+
+</div>
+
+
 <!-- PLAYLIST MODAL -->
 <div class="modal" id="playlistModal">
   <div class="modal-content playlist-content">
