@@ -12,50 +12,44 @@
 
   <div class="container">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="profile-logo" id="openProfile">
-  <h2 class="logo">Rahima</h2>
-  <span class="info-icon">ⓘ Info </span>
-</div>
-
-<ul class="menu">
-  <li class="active">Dashboard</li>
-  <li id="addPlaylistBtn" class="add-playlist">+ Add Playlist</li>
-
-  <li>
-    <ul id="playlistContainer" class="playlist-container"></ul>
-  </li>
- <li><a href="notes.html" class="menu-btn" id="menuNotes">📝 Notes</a></li>
-  <li><a href="meeting.html" class="menu-btn" id="menuMeetings">📅 Meetings</a></li>
-  <li><a href="clock.html" class="menu-btn" id="menuClock">⏰ Clock</a></li>
-  <li><a href="calender.html" class="menu-btn" id="menuCalendar">🗓 Calendar</a></li>
+<aside class="sidebar">
  
-</ul>
+  <div class="profile-logo" id="openProfile">
+    <h2 class="logo">Rahima</h2>
+    <span class="info-icon">ⓘ Info </span>
+  </div>
 
-<div id="mainContent"></div>
+  <ul class="menu">
+    <li class="active">Dashboard</li>
+    <li id="addPlaylistBtn" class="add-playlist">+ Add Playlist</li>
 
-    <div class="calendar-box">
-        <button class="cal-btn">&#10094;</button>
-        <span>February 2026</span>
-        <button class="cal-btn">&#10095;</button>
-      </div>
+    <li>
+      <ul id="playlistContainer" class="playlist-container"></ul>
+    </li>
 
-<!-- ================= Sidebar Toolbar ================= -->
-<div class="sidebar-toolbar">
-  <!-- Log Out Button -->
-  <button id="logoutBtn" title="Log Out">
-    <i class="fa fa-sign-out-alt"></i>
-  </button>
+    <li><a href="notes.html" class="menu-btn" id="menuNotes">📝 Notes</a></li>
+    <li><a href="meeting.html" class="menu-btn" id="menuMeetings">📅 Meetings</a></li>
+    <li><a href="clock.html" class="menu-btn" id="menuClock">⏰ Clock</a></li>
+    <li><a href="calender.html" class="menu-btn" id="menuCalendar">🗓 Calendar</a></li>
+  </ul>
 
-  <!-- Settings Button -->
-  <button id="settingsBtn" title="Settings">
-    <i class="fa fa-cog"></i>
-  </button>
-</div>
+  <div class="calendar-box">
+    <button class="cal-btn">&#10094;</button>
+    <span>February 2026</span>
+    <button class="cal-btn">&#10095;</button>
+  </div>
 
-    </aside>
+  <div class="sidebar-toolbar">
+    <button id="logoutBtn" title="Log Out">
+      <i class="fa fa-sign-out-alt"></i>
+    </button>
 
+    <button id="settingsBtn" title="Settings">
+      <i class="fa fa-cog"></i>
+    </button>
+  </div>
+
+</aside>
 
     <!-- MAIN CONTENT -->
     <main class="main">

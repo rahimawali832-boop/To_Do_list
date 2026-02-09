@@ -1501,60 +1501,425 @@ body {
 .meeting-actions .delete-btn { background:#ff4c4c; color:#fff; }
 .meeting-form { display:none; flex-direction:column; gap:10px; }
 .meeting-form.show { display:flex; opacity:1; }
-/* Sidebar menu clean and modern */
-.sidebar ul.menu {
-  list-style: none;
-  padding: 0;
+/* ===========================
+   SIDEBAR FIX FOR 100% SCREEN
+=========================== */
+
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+}
+
+/* MENU should scroll if too long */
+.menu {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 10px;
   margin: 0;
+  list-style: none;
 }
 
-.sidebar ul.menu li {
-  margin-bottom: 10px;
+/* Hide scrollbar but still scroll */
+.menu::-webkit-scrollbar {
+  width: 6px;
+}
+.menu::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
 }
 
-.sidebar ul.menu li a.menu-btn {
+/* Make menu items smaller */
+.menu li {
+  font-size: 14px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-radius: 12px;
+}
+
+/* Menu links no underline */
+.menu li a {
+  text-decoration: none;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  
+  gap: 10px;
+  color: white;
+  padding: 10px 12px;
   border-radius: 12px;
-  text-decoration: none; /* remove underline */
-  color: var(--text-color, #f2f4ff);
-  font-weight: 500;
+}
+
+/* Hover effect */
+.menu li a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Active menu */
+.menu li.active {
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 600;
+}
+
+/* Playlist container smaller */
+.playlist-container {
+  padding-left: 10px;
+  margin-top: 8px;
+}
+
+.playlist-container li {
+  font-size: 13px;
+  padding: 7px 10px;
+  margin-bottom: 5px;
+}
+
+/* Calendar always visible bottom */
+.calendar-box {
+  margin-top: auto;
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Sidebar toolbar always visible bottom */
+.sidebar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.15);
+}
+
+/* Buttons style */
+.sidebar-toolbar button {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
   transition: 0.3s;
+}
+
+.sidebar-toolbar button:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+.sidebar-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.15);
+}
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 18px;
+  background: rgba(15,23,42,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+}
+
+.menu-toggle {
+  font-size: 24px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  box-shadow: 0 0 15px rgba(143,124,255,0.6);
+}
+
+.mobile-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  z-index: 2500;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (max-width: 900px) {
+
+  .mobile-topbar {
+    display: flex;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 2600;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main {
+    padding: 20px;
+  }
+}
+/* ================= Right Panel ================= */
+.right-panel {
+  width: 320px;
+  background: rgba(15, 23, 42, 0.95);
+  border-left: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 20px 0 0 20px;
+  box-shadow: -5px 0 25px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Header */
+.right-panel .panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.right-panel .panel-header h2 {
+  font-size: 18px;
+  color: var(--secondary);
+}
+
+.right-panel .panel-header button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.right-panel .panel-header button:hover {
+  color: var(--primary);
+}
+
+/* Panel Body */
+.right-panel .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+}
+
+/* Overlay for mobile */
+.right-panel-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 999;
+}
+/* ================= Base Desktop ================= */
+.task-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: transparent;  /* keep your theme background */
+  padding: 15px;
+  border-radius: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.task-input input[type="text"] {
+  flex: 1 1 auto;
+  padding: 12px 15px;
+  border-radius: 12px;      /* smooth rounded */
+  border: 1px solid #444;
   font-size: 1rem;
-}
-
-.sidebar ul.menu li a.menu-btn:hover {
- 
+  min-width: 200px;
+  background: #1e1e2f;      /* dark theme */
   color: #fff;
-  transform: translateX(5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.sidebar ul.menu li a.menu-btn i {
-  margin-right: 10px; /* space between icon and text */
-  font-size: 1.2rem;
+.custom-select {
+  flex: 0 0 130px;
+  min-width: 100px;
 }
 
-/* Optional: make playlist container more clean */
-#playlistContainer {
-  list-style: none;
-  padding-left: 20px;
-  margin: 5px 0;
+.select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 12px;      /* smooth rounded */
+  border: 1px solid #444;
+  background: #2a2a40;      /* dark dropdown */
+  color: #fff;
+  cursor: pointer;
 }
 
-#playlistContainer li {
-  padding: 6px 10px;
-  margin-bottom: 4px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.1);
+.task-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.task-buttons button {
+  padding: 10px 15px;
+  border-radius: 12px;      /* round buttons */
+  border: none;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.2s;
 }
 
-#playlistContainer li:hover {
-  background: var(--accent2, #4da6ff);
+/* Calendar & Clock Buttons */
+#calendarBtn, #clockBtn {
+  width: 45px;
+  height: 45px;
+  background: #6c757d;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calendarBtn:hover, #clockBtn:hover {
+  background: #495057;
+}
+
+/* Add Task Button */
+#addTaskBtn {
+  background: #7b5af5;
+  color: #fff;
+  min-width: 120px;
+  font-weight: 500;
+}
+
+#addTaskBtn:hover {
+  background: #592de0;
+}
+
+/* ================= Tablet (768px - 1024px) ================= */
+@media (max-width: 1024px) {
+  .task-input {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .task-input input[type="text"],
+  .custom-select,
+  .task-buttons {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .task-buttons {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  #calendarBtn, #clockBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  #addTaskBtn {
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+
+/* ================= Mobile (480px - 767px) ================= */
+@media (max-width: 767px) {
+  .task-input {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-input input[type="text"],
+  .custom-select,
+  .task-buttons {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .task-buttons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #calendarBtn, #clockBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+  }
+
+  #addTaskBtn {
+    width: 100%;
+    flex: 1 1 100%;
+    border-radius: 12px;
+  }
+}
+
+/* ================= Extra Small <480px ================= */
+@media (max-width: 479px) {
+  .task-input input[type="text"] {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .select-box {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .task-buttons button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  #calendarBtn, #clockBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  #addTaskBtn {
+    font-size: 0.9rem;
+  }
 }

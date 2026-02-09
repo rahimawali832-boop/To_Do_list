@@ -1840,3 +1840,68 @@ addEventBtn.addEventListener("click", () => {
 // ---------- INIT ----------
 renderTimeColumn();
 renderWeek();
+const rightPanel = document.querySelector(".right-panel");
+const rightPanelOverlay = document.getElementById("rightPanelOverlay");
+const closeRightPanelBtn = document.getElementById("closeRightPanel");
+const openRightPanelBtn = document.getElementById("openRightPanel"); // you need a button somewhere
+
+// Open panel
+if(openRightPanelBtn){
+  openRightPanelBtn.addEventListener("click", () => {
+    rightPanel.classList.add("active");
+    rightPanelOverlay.classList.add("active");
+  });
+}
+
+// Close panel
+if(closeRightPanelBtn){
+  closeRightPanelBtn.addEventListener("click", () => {
+    rightPanel.classList.remove("active");
+    rightPanelOverlay.classList.remove("active");
+  });
+}
+
+// Overlay click
+if(rightPanelOverlay){
+  rightPanelOverlay.addEventListener("click", () => {
+    rightPanel.classList.remove("active");
+    rightPanelOverlay.classList.remove("active");
+  });
+}
+
+function openRightPanel() {
+  rightPanel.classList.add('active');
+  rightPanelOverlay.style.display = 'block';
+}
+
+function closeRightPanel() {
+  rightPanel.classList.remove('active');
+  rightPanelOverlay.style.display = 'none';
+}
+
+document.getElementById('closeRightPanel').addEventListener('click', closeRightPanel);
+rightPanelOverlay.addEventListener('click', closeRightPanel);
+// Handle custom dropdowns
+document.querySelectorAll('.custom-select').forEach(select => {
+  const box = select.querySelector('.select-box');
+  const options = select.querySelector('.options');
+  const selectedText = select.querySelector('.selected-text');
+
+  box.addEventListener('click', () => {
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+  });
+
+  options.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      selectedText.textContent = opt.dataset.value;
+      options.style.display = 'none';
+    });
+  });
+});
+
+// Close dropdowns if clicked outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.custom-select')) {
+    document.querySelectorAll('.options').forEach(opt => opt.style.display = 'none');
+  }
+});
